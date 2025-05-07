@@ -33,7 +33,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
                 <div
-                    class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center transform transition-transform duration-300 hover:-translate-y-2">
+                    class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <div class="p-6">
                         <img src="{{ asset('images/projects.webp') }}" alt="Projects Icon"
                             class="mx-auto h-50 rounded-lg mb-4">
@@ -47,7 +47,7 @@
                 </div>
 
                 <div
-                    class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center transform transition-transform duration-300 hover:-translate-y-2">
+                    class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <div class="p-6">
                         <img src="{{ asset('images/events.webp') }}" alt="Events Icon"
                             class="mx-auto h-50 rounded-lg mb-4">
@@ -61,7 +61,7 @@
                 </div>
 
                 <div
-                    class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center transform transition-transform duration-300 hover:-translate-y-2">
+                    class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <div class="p-6">
                         <img src="{{ asset('images/budget.webp') }}" alt="Budget Icon"
                             class="mx-auto h-50 rounded-lg mb-4">
@@ -123,7 +123,7 @@
     <section class="py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
-                <div class="flex flex-col h-full  transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="flex flex-col h-full  hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <h2 class="text-3xl font-bold text-pink-600 text-center mb-4">Vision</h2>
                     <div
                         class="bg-white rounded-xl shadow-md p-6 text-gray-700 text-center flex-grow flex items-center justify-center">
@@ -137,7 +137,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col h-full  transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="flex flex-col h-full  hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <h2 class="text-3xl font-bold text-pink-600 text-center mb-4">Mission</h2>
                     <div
                         class="bg-white rounded-xl shadow-md p-6 text-gray-700 text-center flex-grow flex items-center justify-center">
@@ -159,7 +159,7 @@
             <h2 class="text-3xl font-bold text-pink-600 mb-12">Our Core Commitments</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div
-                    class="bg-gray-50 p-6 rounded-lg shadow transform transition-transform duration-300 hover:-translate-y-2 shadow-md">
+                    class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">Empower the Youth</h3>
                     <p class="text-gray-600 text-sm">
                         Equip young individuals with leadership skills, values, and opportunities to become proactive
@@ -168,7 +168,7 @@
                 </div>
 
                 <div
-                    class="bg-gray-50 p-6 rounded-lg shadow transform transition-transform duration-300 hover:-translate-y-2 shadow-md">
+                    class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <h3 class="text-xl font-semibold text-green-700 mb-2">Promote Transparency and Accountability</h3>
                     <p class="text-gray-600 text-sm">
                         Ensure that all projects and activities are carried out with integrity, transparency, and
@@ -177,7 +177,7 @@
                 </div>
 
                 <div
-                    class="bg-gray-50 p-6 rounded-lg shadow transform transition-transform duration-300 hover:-translate-y-2 shadow-md">
+                    class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <h3 class="text-xl font-semibold text-pink-600 mb-2">Foster Community Engagement</h3>
                     <p class="text-gray-600 text-sm">
                         Create programs that encourage youth participation in cultural, educational, environmental, and
@@ -186,7 +186,7 @@
                 </div>
 
                 <div
-                    class="bg-gray-50 p-6 rounded-lg shadow transform transition-transform duration-300 hover:-translate-y-2 shadow-md">
+                    class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <h3 class="text-xl font-semibold text-purple-700 mb-2">Support Holistic Development</h3>
                     <p class="text-gray-600 text-sm">
                         Address the physical, mental, emotional, and social needs of the youth through comprehensive and
@@ -215,7 +215,7 @@
             <h2 class="text-3xl font-bold text-pink-600 text-center mb-12">Our Featured SK</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 @for ($i = 1; $i <= 10; $i++) <div
-                    class="bg-white rounded-lg shadow p-4 text-center  transform transition-transform duration-300 hover:-translate-y-2 shadow-md">
+                    class="bg-white rounded-lg shadow p-4 text-center  hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                     <img src="{{ asset("images/members/admin$i.webp") }}" alt="{{ $memberNames[$i - 1] }}"
                         class="w-full h-50 object-cover object-top rounded mb-4">
                     <h3 class="font-semibold text-lg text-gray-800 mb-2">{{ $memberNames[$i - 1] }}</h3>
