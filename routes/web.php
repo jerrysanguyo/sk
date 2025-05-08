@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
@@ -23,4 +24,5 @@ Route::middleware(['auth'])
         Route::resource('budget_category', BudgetCategoryController::class);
         Route::resource('inventory_category', InventoryCategoryController::class);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('user', UserController::class);
     });

@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/4f2d7302b1.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -32,7 +34,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('user.index') }}"
                                 class="flex items-center px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition">
                                 <i class="fas fa-user-friends w-5 mr-3 text-pink-500"></i> Members
                             </a>
@@ -49,6 +51,25 @@
                                 <i class="fas fa-hand-holding-usd w-5 mr-3 text-pink-500"></i> Budget
                             </a>
                         </li>
+                        <li x-data="{ open: false }" class="relative">
+                            <button @click="open = !open"
+                                class="flex items-center w-full px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition text-left">
+                                <i class="fas fa-layer-group w-5 mr-3 text-pink-500"></i>
+                                <span class="flex-1">CMS</span>
+                                <i class="fas fa-chevron-down text-xs ml-auto"></i>
+                            </button>
+
+                            <div x-show="open" x-transition class="ml-10 mt-1 space-y-1">
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition text-left">
+                                    Budget Category
+                                </a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition text-left">
+                                    Inventory Category
+                                </a>
+                            </div>
+                        </li>
                         <li>
                             <a href="#"
                                 class="flex items-center px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition">
@@ -63,9 +84,7 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col">
-            <!-- Topbar -->
             <header class="bg-white shadow px-4 py-3 flex items-center justify-between md:justify-end">
                 <button class="md:hidden text-gray-600 hover:text-pink-600 focus:outline-none"
                     onclick="document.querySelector('aside').classList.toggle('hidden')">
@@ -78,8 +97,6 @@
                         {{ Auth::user()->last_name }}
                         <i class="fas fa-chevron-down text-xs"></i>
                     </button>
-
-                    <!-- Dropdown -->
                     <div x-show="open" @click.away="open = false" x-transition
                         class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded shadow-lg z-50 text-left">
                         <a href="#"
@@ -95,7 +112,6 @@
                 </div>
             </header>
 
-            <!-- Page Content -->
             <main class="flex-1 p-6">
                 @yield('content')
             </main>

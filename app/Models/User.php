@@ -17,7 +17,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'contact_number',
-        'dat_of_birth',
+        'date_of_birth',
         'gender',
         'address',
         'password',
@@ -32,4 +32,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function getAllUsers()
+    {
+        return self::all();
+    }
 }
