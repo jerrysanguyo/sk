@@ -32,8 +32,13 @@
                 <div class="hidden md:flex space-x-6">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-pink-500">Home</a>
                     <a href="{{ route('contact') }}" class="text-gray-700 hover:text-pink-500">Contact</a>
+                    @if (Auth::user())
+                    <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-pink-500"><i
+                            class="fa-solid fa-right-to-bracket"></i></a>
+                    @else
                     <a href="{{ route('login') }}" class="text-gray-700 hover:text-pink-500"><i
                             class="fa-solid fa-right-to-bracket"></i></a>
+                    @endif
                 </div>
             </div>
 
@@ -54,7 +59,7 @@
     <main>
         @yield('content')
     </main>
-    
+
     <footer class="bg-gray-900 text-gray-200 pt-12 pb-8">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="text-center">

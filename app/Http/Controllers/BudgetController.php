@@ -3,63 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
-use Illuminate\Http\Request;
+use App\Models\BudgetCategory;
+use App\Http\Requests\BudgetRequest;
+use App\DataTables\CmsDataTable;
+use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(CmsDataTable $dataTable)
     {
-        //
+        $page_title = 'Budget ';
+        $resource = 'budget';
+        $columns = ['id', 'category', 'allocated', 'spent', 'actions'];
+        $data = Budget::getAllBudgets();
+        $budgetCategories = BudgetCategory::getAllBudgetCategories();
+
+        return $dataTable
+            ->render('cms.index', compact(
+                'page_title',
+                'resource', 
+                'columns',
+                'data',
+                'dataTable',
+                'budgetCategories',
+            ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(BudgetRequest $request)
     {
-        //
-    }
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        Budget::create($data);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+        return redirect()
+            ->route('budget.index')
+            ->with('success', 'You have successfully encoded a budget!');
+    }
+    
+    public function update(BudgetRequest $request, Budget $budget)
     {
-        //
-    }
+        $budget->update($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Budget $budget)
-    {
-        //
+        return redirect()
+            ->route('budget.index')
+            ->with('success', 'You have successfully update a budget!');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Budget $budget)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Budget $budget)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Budget $budget)
     {
-        //
+        $budget->delete();
+
+        return redirect()
+            ->route('budget.index')
+            ->with('success', 'You have successfully delete a budget!');
     }
 }

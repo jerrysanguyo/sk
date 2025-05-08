@@ -18,7 +18,7 @@ class Budget extends Model
         'budget_id',
     ];
 
-    public static function getAllBudget()
+    public static function getAllBudgets()
     {
         return self::all();
     }
@@ -28,7 +28,7 @@ class Budget extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function budget()
+    public function category()
     {
         return $this->belongsTo(BudgetCategory::class, 'budget_id');
     }

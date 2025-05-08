@@ -41,7 +41,7 @@ class LoginController extends Controller
         $this->loginService->logout();
 
         return redirect()
-            ->route('login')
+            ->route('home')
             ->with('success', 'You have successfully logged out!');
     }
 }

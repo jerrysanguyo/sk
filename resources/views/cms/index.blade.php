@@ -1,5 +1,49 @@
 @extends('layouts.dashboard')
 @section('content')
+@if ($resource === 'budget')
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div
+        class="bg-pink-100 border border-pink-300 text-pink-800 rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div class="mb-2">
+            <i class="fas fa-wallet fa-2x text-pink-600"></i>
+        </div>
+        <h3 class="text-sm font-medium mb-1 uppercase">Total Allocated</h3>
+        <p class="text-2xl font-bold">₱{{ number_format($data->sum('allocated'), 2) }}</p>
+    </div>
+
+    <div
+        class="bg-green-100 border border-green-300 text-green-800 rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div class="mb-2">
+            <i class="fas fa-receipt fa-2x text-green-600"></i>
+        </div>
+        <h3 class="text-sm font-medium mb-1 uppercase">Total Spent</h3>
+        <p class="text-2xl font-bold">₱{{ number_format($data->sum('spent'), 2) }}</p>
+    </div>
+
+    @php
+    $totalAllocated = $data->sum('allocated');
+    $totalSpent = $data->sum('spent');
+    $totalRemaining = $totalAllocated - $totalSpent;
+
+    $bgColor = 'bg-white border-gray-300 text-gray-800';
+    $iconColor = 'text-gray-400';
+
+    if ($totalRemaining > 0) {
+    $bgColor = 'bg-green-100 border-green-300 text-green-800';
+    $iconColor = 'text-green-600';
+    } elseif ($totalRemaining < 0) { $bgColor='bg-red-100 border-red-300 text-red-800' ; $iconColor='text-red-600' ; }
+        @endphp <div
+        class="{{ $bgColor }} rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div class="mb-2">
+            <i class="fas fa-coins fa-2x {{ $iconColor }}"></i>
+        </div>
+        <h3 class="text-sm font-medium mb-1 uppercase">Total Remaining</h3>
+        <p class="text-2xl font-bold">
+            ₱{{ number_format($totalRemaining, 2) }}
+        </p>
+</div>
+</div>
+@endif
 <div class="w-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 overflow-auto max-h-[85vh] min-h-[85vh]">
     <div class="flex justify-between items-center mb-5 overflow-auto">
         <h1 class="text-3xl font-bold mb-2 text-center text-gray-800">{{ $page_title }} records</h1>
@@ -28,7 +72,11 @@
                 @if ($resource === 'user')
                 <td class="py-2 px-4">{{ $record->first_name }} {{ $record->middle_name ?: '' }}
                     {{ $record->last_name }}</td>
-                    <td class="py-2 px-4">{{ $record->email }}</td>
+                <td class="py-2 px-4">{{ $record->email }}</td>
+                @elseif ($resource === 'budget')
+                <td class="py-2 px-4">{{ $record->category->name }}</td>
+                <td class="py-2 px-4">{{ $record->allocated }} - Dated: {{ $record->date_allocated }}</td>
+                <td class="py-2 px-4">{{ $record->spent }} - Dated: {{ $record->date_spent }}</td>
                 @else
                 <td class="py-2 px-4">{{ $record->name }}</td>
                 <td class="py-2 px-4">{{ $record->remarks }}</td>
