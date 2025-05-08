@@ -21,6 +21,7 @@ Route::get('/contact-us', function () {
 
 Route::get('/project-show', [ProjectController::class, 'projectShow'])->name('project');
 Route::get('/event-show', [EventController::class, 'eventShow'])->name('event');
+Route::get('/budget-show', [BudgetController::class, 'budgetShow'])->name('budget');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

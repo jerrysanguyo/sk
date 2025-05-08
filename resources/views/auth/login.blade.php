@@ -3,8 +3,7 @@
 <div class="flex items-center justify-center min-h-screen ml-5 mr-5">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <img class="w-30 mx-auto block" src="{{ asset('images/logo/sk-logo.png') }}" alt="">
-        <h2 class="text-2xl font-bold mb-2 text-center text-gray-800">CSWDO Burial
-            Assistance</h2>
+        <h2 class="text-2xl font-bold mb-2 text-center text-gray-800">Barangay lower bicutan SK portal</h2>
         <p class="mb-4 text-center text-gray-600 text-sm">
             Please enter your credentials to access the dashboard. If you need assistance, contact your
             administrator.
@@ -48,7 +47,7 @@
             </div>
             <div>
                 <button type="submit"
-                    class="w-full bg-gray-700 text-white py-2 rounded-md hover:bg-gray-300 hover:text-black transition-colors">Login</button>
+                    class="w-full bg-pink-600 text-white py-2 rounded-md  hover:bg-pink-700 hover:text-white border border-pink-700 transition-colors">Login</button>
             </div>
         </form>
         <div class="mt-3 flex justify-between text-sm">

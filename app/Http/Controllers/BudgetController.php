@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller
 {
+    public function budgetShow(CmsDataTable $dataTable)
+    {
+        $page_title = 'Budget';
+        $resource = 'budget';
+        $columns = ['id', 'category', 'allocated', 'spent'];
+        $data = Budget::getAllBudgets();
+        $budgetCategories = BudgetCategory::getAllBudgetCategories();
+
+        return $dataTable
+            ->render('budget', compact(
+                'page_title',
+                'resource', 
+                'columns',
+                'data',
+                'dataTable',
+                'budgetCategories',
+            ));
+    }
+
     public function index(CmsDataTable $dataTable)
     {
         $page_title = 'Budget';

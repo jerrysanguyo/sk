@@ -10,9 +10,22 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function eventShow()
+    public function eventShow(Request $request)
     {
-        return view('event');
+        $page_title = 'event';
+        $resource = 'event';
+
+        $query = Event::query();
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        $query->orderBy('created_at', 'desc');
+
+        $data = $query->paginate(8)->withQueryString();
+
+        return view('event', compact('page_title', 'resource', 'data'));
     }
 
     public function index(Request $request)

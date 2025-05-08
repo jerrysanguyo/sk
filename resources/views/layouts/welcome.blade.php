@@ -9,6 +9,8 @@
     <script src="https://kit.fontawesome.com/4f2d7302b1.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body class="antialiased">
@@ -77,10 +79,9 @@
                 <h4 class="text-lg font-semibold text-white mb-3">Quick Links</h4>
                 <ul class="space-y-2 text-sm text-gray-300">
                     <li><a href="{{ route('home') }}" class="hover:text-pink-400 transition">Home</a></li>
-                    <li><a href="#about" class="hover:text-pink-400 transition">About Us</a></li>
-                    <li><a href="#projects" class="hover:text-pink-400 transition">Projects</a></li>
-                    <li><a href="#events" class="hover:text-pink-400 transition">Events</a></li>
-                    <li><a href="#budget" class="hover:text-pink-400 transition">Budget</a></li>
+                    <li><a href="{{ route('project') }}" class="hover:text-pink-400 transition">Projects</a></li>
+                    <li><a href="{{ route('event') }}" class="hover:text-pink-400 transition">Events</a></li>
+                    <li><a href="{{ route('budget') }}" class="hover:text-pink-400 transition">Budget</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-pink-400 transition">Contact</a></li>
                 </ul>
             </div>
