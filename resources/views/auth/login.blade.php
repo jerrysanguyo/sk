@@ -9,6 +9,7 @@
             Please enter your credentials to access the dashboard. If you need assistance, contact your
             administrator.
         </p>
+        @include('components.alert')
         <form action="{{ route('authenticate') }}" method="POST">
             @csrf
             <div class="mb-4">
