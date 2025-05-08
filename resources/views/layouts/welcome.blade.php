@@ -15,7 +15,7 @@
 
 <body class="antialiased">
 
-    @if (Request::is('login'))
+@if (Request::is('login') || Request::is('forgot-password') || Request::is('reset-password*'))
     <main>
         @yield('content')
     </main>

@@ -51,7 +51,8 @@
             </div>
         </form>
         <div class="mt-3 flex justify-between text-sm">
-            <a href="#" class="text-blue-500 hover:underline">Forgot Password?</a>
+            <a href="{{ route('password.request') }}" class="inline-block text-sm text-pink-600 hover:underline transition">Forgot
+                Password?</a>
         </div>
     </div>
 </div>
