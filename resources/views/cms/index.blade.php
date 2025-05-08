@@ -44,6 +44,33 @@
 </div>
 </div>
 @endif
+@if ($resource === 'inventory')
+@php
+$totalItems = $data->sum('quantity');
+$totalCosting = $data->sum(function ($item) {
+return $item->cost * $item->quantity;
+});
+@endphp
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div
+        class="bg-indigo-100 border border-indigo-300 text-indigo-800 rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div class="mb-2">
+            <i class="fas fa-boxes fa-2x text-indigo-600"></i>
+        </div>
+        <h3 class="text-sm font-medium mb-1 uppercase">Total Items</h3>
+        <p class="text-2xl font-bold">{{ $totalItems }}</p>
+    </div>
+
+    <div
+        class="bg-purple-100 border border-purple-300 text-purple-800 rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div class="mb-2">
+            <i class="fas fa-calculator fa-2x text-purple-600"></i>
+        </div>
+        <h3 class="text-sm font-medium mb-1 uppercase">Total Costing</h3>
+        <p class="text-2xl font-bold">₱{{ number_format($totalCosting, 2) }}</p>
+    </div>
+</div>
+@endif
 <div class="w-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 overflow-auto max-h-[85vh] min-h-[85vh]">
     <div class="flex justify-between items-center mb-5 overflow-auto">
         <h1 class="text-3xl font-bold mb-2 text-center text-gray-800">{{ $page_title }} records</h1>
