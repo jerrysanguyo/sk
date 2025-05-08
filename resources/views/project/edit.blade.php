@@ -24,14 +24,16 @@
                     <label for="file_name" class="block text-sm font-medium text-gray-700">Upload Image</label>
                     <div x-data="{ fileName: '{{ $project->file_name }}' }"
                         class="w-full h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-md p-4 bg-gray-50">
-                        <label for="file_name"
+
+                        <div @click="$refs.fileInput.click()"
                             class="cursor-pointer text-center text-gray-500 hover:text-pink-600 transition">
                             <div class="mb-2">
                                 <i class="fas fa-upload fa-2x"></i>
                             </div>
                             <span x-text="fileName || 'Click or drag image here'"></span>
-                        </label>
-                        <input type="file" name="file_name" id="file_name" accept="image/*" class="hidden"
+                        </div>
+
+                        <input type="file" name="file_name" accept="image/*" x-ref="fileInput" class="hidden"
                             @change="fileName = $event.target.files[0].name">
                     </div>
                     <p class="text-xs text-gray-500 text-center">Current file: {{ $project->file_name }}</p>

@@ -58,12 +58,12 @@ class EventController extends Controller
             $timestamp = now()->format('YmdHis');
     
             $filename = "project{$userId}_{$timestamp}.{$extension}";
-            $destination = public_path('projects');
+            $destination = public_path('events');
     
             $file->move($destination, $filename);
     
             $validated['file_name'] = $filename;
-            $validated['file_path'] = "projects/{$filename}"; 
+            $validated['file_path'] = "events/{$filename}"; 
         }
     
         $validated['user_id'] = Auth::id();

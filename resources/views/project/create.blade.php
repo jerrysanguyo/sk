@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-end mt-10">
+            <div class="flex justify-start mt-10">
                 <button type="button" @click="showModal = false"
                     class="px-4 py-2 mr-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-pink-100 hover:text-pink-600 transition">
                     Cancel

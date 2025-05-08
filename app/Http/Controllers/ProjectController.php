@@ -84,33 +84,32 @@ class ProjectController extends Controller
     public function update(ProjectRequest $request, Project $project)
     {
         $validated = $request->validated();
-    
+
         if ($request->hasFile('file_name')) {
-            if ($project->file_path && File::exists(public_path($project->file_path))) {
-                File::delete(public_path($project->file_path));
+            $oldPath = public_path($project->file_path);
+            if (File::exists($oldPath)) {
+                File::delete($oldPath);
             }
-    
+            
             $file = $request->file('file_name');
             $extension = $file->getClientOriginalExtension();
             $userId = Auth::id();
             $timestamp = now()->format('YmdHis');
-    
+
             $filename = "project{$userId}_{$timestamp}.{$extension}";
-            $destination = public_path('projects');
-    
-            $file->move($destination, $filename);
-    
+            $file->move(public_path('projects'), $filename);
+
             $validated['file_name'] = $filename;
             $validated['file_path'] = "projects/{$filename}";
         } else {
             $validated['file_name'] = $project->file_name;
             $validated['file_path'] = $project->file_path;
         }
-    
+
         $validated['user_id'] = Auth::id();
-    
+
         $project->update($validated);
-    
+
         return redirect()
             ->route('project.index')
             ->with('success', 'Project successfully updated!');
