@@ -20,7 +20,7 @@ class InventoryCategoryController extends Controller
     {
         $page_title = 'Inventory Category';
         $resource = 'inventory_category';
-        $columns = ['name', 'remarks', 'actions'];
+        $columns = ['id', 'name', 'remarks', 'actions'];
         $data = InventoryCategory::getAllInventoryCategories();
 
         return $dataTable

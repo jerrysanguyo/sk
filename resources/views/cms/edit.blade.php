@@ -10,11 +10,14 @@
             <button @click="showEditModal = false"
                 class="text-gray-400 hover:text-pink-600 text-2xl leading-none">&times;</button>
         </div>
-        <form action="{{ route($resource . '.update', $record->id) }}"
-            method="POST">
+        <form action="{{ route($resource . '.update', $record->id) }}" method="POST">
             @csrf
             @method('put')
+            @if ($resource === 'budget_category' || $resource === 'inventory_category')
+            @include('cms.partial.budget_category')
+            @else
             @include('cms.partial.' . $resource)
+            @endif
             <div class="flex justify-end mt-6">
                 <button type="button" @click="showModal = false"
                     class="px-4 py-2 mr-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-pink-100 hover:text-pink-600 transition">

@@ -60,11 +60,11 @@
                             </button>
 
                             <div x-show="open" x-transition class="ml-10 mt-1 space-y-1">
-                                <a href="#"
+                                <a href="{{ route('budget_category.index') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition text-left">
                                     Budget Category
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('inventory_category.index') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition text-left">
                                     Inventory Category
                                 </a>

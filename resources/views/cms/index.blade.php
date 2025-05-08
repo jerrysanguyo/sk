@@ -6,7 +6,7 @@
         <div x-data="{ showModal: false }">
             <button @click="showModal = true"
                 class="px-5 py-2 text-white bg-pink-600 rounded-lg hover:bg-pink-700 hover:text-white border border-pink-700 transition-colors">
-                <i class="fa-solid fa-plus"></i> Add {{ $resource }}
+                <i class="fa-solid fa-plus"></i> Add {{ $page_title }}
             </button>
             @include('cms.create')
         </div>
@@ -25,9 +25,14 @@
             @foreach ($data as $record)
             <tr class="border border-gray-200 hover:bg-pink-50 transition-colors">
                 <td class="py-2 px-4">{{ $record->id }}</td>
+                @if ($resource === 'user')
                 <td class="py-2 px-4">{{ $record->first_name }} {{ $record->middle_name ?: '' }}
                     {{ $record->last_name }}</td>
-                <td class="py-2 px-4">{{ $record->email }}</td>
+                    <td class="py-2 px-4">{{ $record->email }}</td>
+                @else
+                <td class="py-2 px-4">{{ $record->name }}</td>
+                <td class="py-2 px-4">{{ $record->remarks }}</td>
+                @endif
                 <td class="py-2 px-4">
                     <div class="inline-flex items-center space-x-2">
                         <div x-data="{ showEditModal: false }">

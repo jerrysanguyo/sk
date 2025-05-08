@@ -20,7 +20,7 @@ class BudgetCategoryController extends Controller
     {
         $page_title = 'Budget Category';
         $resource = 'budget_category';
-        $columns = ['name', 'remarks', 'actions'];
+        $columns = ['id', 'name', 'remarks', 'actions'];
         $data = BudgetCategory::getAllBudgetCategories();
 
         return $dataTable
