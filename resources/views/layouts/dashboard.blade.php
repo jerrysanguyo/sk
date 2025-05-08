@@ -46,6 +46,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('project.index') }}"
+                                class="flex items-center px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition">
+                                <i class="fas fa-project-diagram w-5 mr-3 text-pink-500"></i> Projects
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('budget.index') }}"
                                 class="flex items-center px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition">
                                 <i class="fas fa-hand-holding-usd w-5 mr-3 text-pink-500"></i> Budget
