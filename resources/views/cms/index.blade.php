@@ -68,18 +68,23 @@
         <tbody class="text-gray-700 text-sm font-normal text-center">
             @foreach ($data as $record)
             <tr class="border border-gray-200 hover:bg-pink-50 transition-colors">
-                <td class="py-2 px-4">{{ $record->id }}</td>
+                <td class="py-2 px-4">{{ $record->id ?? '' }}</td>
                 @if ($resource === 'user')
-                <td class="py-2 px-4">{{ $record->first_name }} {{ $record->middle_name ?: '' }}
-                    {{ $record->last_name }}</td>
-                <td class="py-2 px-4">{{ $record->email }}</td>
+                <td class="py-2 px-4">{{ $record->first_name ?? '' }} {{ $record->middle_name ?: '' }}
+                    {{ $record->last_name ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->email ?? '' }}</td>
                 @elseif ($resource === 'budget')
-                <td class="py-2 px-4">{{ $record->category->name }}</td>
-                <td class="py-2 px-4">{{ $record->allocated }} - Dated: {{ $record->date_allocated }}</td>
-                <td class="py-2 px-4">{{ $record->spent }} - Dated: {{ $record->date_spent }}</td>
+                <td class="py-2 px-4">{{ $record->category->name ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->allocated ?? '' }} - Dated: {{ $record->date_allocated ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->spent ?? '' }} - Dated: {{ $record->date_spent ?? '' }}</td>
+                @elseif ($resource === 'inventory')
+                <td class="py-2 px-4">{{ $record->category->name ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->name ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->quantity ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->cost ?? '' }}</td>
                 @else
-                <td class="py-2 px-4">{{ $record->name }}</td>
-                <td class="py-2 px-4">{{ $record->remarks }}</td>
+                <td class="py-2 px-4">{{ $record->name ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->remarks ?? '' }}</td>
                 @endif
                 <td class="py-2 px-4">
                     <div class="inline-flex items-center space-x-2">

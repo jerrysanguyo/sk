@@ -12,7 +12,7 @@ class BudgetController extends Controller
 {
     public function index(CmsDataTable $dataTable)
     {
-        $page_title = 'Budget ';
+        $page_title = 'Budget';
         $resource = 'budget';
         $columns = ['id', 'category', 'allocated', 'spent', 'actions'];
         $data = Budget::getAllBudgets();

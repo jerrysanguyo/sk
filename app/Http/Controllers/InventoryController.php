@@ -3,63 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
-use Illuminate\Http\Request;
+use App\Models\InventoryCategory;
+use App\Http\Requests\InventoryRequest;
+use App\DataTables\CmsDataTable;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(CmsDataTable $dataTable)
     {
-        //
+        $page_title = 'Inventory';
+        $resource = 'inventory';
+        $columns = ['id', 'category', 'name', 'quantity', 'cost', 'actions'];
+        $data = Inventory::getAllInventories();
+        $inventoryCategories = InventoryCategory::getAllInventoryCategories();
+
+        return $dataTable
+            ->render('cms.index', compact(
+                'page_title',
+                'resource', 
+                'columns',
+                'data',
+                'dataTable',
+                'inventoryCategories',
+            ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(InventoryRequest $request)
     {
-        //
-    }
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        Inventory::create($data);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+        return redirect()
+            ->route('inventory.index')
+            ->with('success', 'You have successfully encoded a inventory!');
+    }
+    
+    public function update(InventoryRequest $request, Inventory $inventory)
     {
-        //
-    }
+        $inventory->update($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Inventory $inventory)
-    {
-        //
+        return redirect()
+            ->route('inventory.index')
+            ->with('success', 'You have successfully update a inventory!');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Inventory $inventory)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Inventory $inventory)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Inventory $inventory)
     {
-        //
+        $inventory->delete();
+
+        return redirect()
+            ->route('inventory.index')
+            ->with('success', 'You have successfully delete a inventory!');
     }
 }

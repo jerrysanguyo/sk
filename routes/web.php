@@ -6,6 +6,7 @@ use App\Http\Controllers\InventoryCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
@@ -27,4 +28,5 @@ Route::middleware(['auth'])
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('user', UserController::class);
         Route::resource('budget', BudgetController::class);
+        Route::resource('inventory', InventoryController::class);
     });
