@@ -36,7 +36,7 @@
                     title="Edit">
                     <i class="fa-solid fa-pen-to-square"></i> Edit
                 </button>
-                <a href="{{ route('project.show', $project->id) }}">
+                <a href="{{ route($resource . '.show', $project->id) }}">
                     <button
                         class="p-2 bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-800 rounded transition"
                         title="View">

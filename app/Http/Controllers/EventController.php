@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\Event;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class EventController extends Controller
 {
     public function index(Request $request)
     {
-        $page_title = 'Project';
-        $resource = 'project';
+        $page_title = 'Event';
+        $resource = 'event';
 
-        $query = Project::query();
+        $query = event::query();
 
         if ($request->filled('search')) {
             $query->where('title', 'like', '%' . $request->search . '%');
@@ -26,12 +26,6 @@ class ProjectController extends Controller
         $data = $query->paginate(8)->withQueryString();
 
         return view('project.index', compact('page_title', 'resource', 'data'));
-    }
-
-    public function show(Project $project)
-    {
-        $resource = 'project';
-        return view('project.show', compact('project', 'resource'));
     }
     
     public function store(ProjectRequest $request)
@@ -56,20 +50,26 @@ class ProjectController extends Controller
     
         $validated['user_id'] = Auth::id();
     
-        Project::create($validated);
+        Event::create($validated);
     
         return redirect()
-            ->route('project.index')
-            ->with('success', 'Project successfully created!');
+            ->route('event.index')
+            ->with('success', 'Event successfully created!');
     }
     
-    public function update(ProjectRequest $request, Project $project)
+    public function show(Event $event)
+    {
+        $resource = 'event';
+        return view('project.show', compact('event', 'resource'));
+    }
+    
+    public function update(ProjectRequest $request, Event $event)
     {
         $validated = $request->validated();
     
         if ($request->hasFile('file_name')) {
-            if ($project->file_path && File::exists(public_path($project->file_path))) {
-                File::delete(public_path($project->file_path));
+            if ($event->file_path && File::exists(public_path($event->file_path))) {
+                File::delete(public_path($event->file_path));
             }
     
             $file = $request->file('file_name');
@@ -77,37 +77,37 @@ class ProjectController extends Controller
             $userId = Auth::id();
             $timestamp = now()->format('YmdHis');
     
-            $filename = "project{$userId}_{$timestamp}.{$extension}";
-            $destination = public_path('projects');
+            $filename = "event{$userId}_{$timestamp}.{$extension}";
+            $destination = public_path('events');
     
             $file->move($destination, $filename);
     
             $validated['file_name'] = $filename;
-            $validated['file_path'] = "projects/{$filename}";
+            $validated['file_path'] = "events/{$filename}";
         } else {
-            $validated['file_name'] = $project->file_name;
-            $validated['file_path'] = $project->file_path;
+            $validated['file_name'] = $event->file_name;
+            $validated['file_path'] = $event->file_path;
         }
     
         $validated['user_id'] = Auth::id();
     
-        $project->update($validated);
+        $event->update($validated);
     
         return redirect()
-            ->route('project.index')
-            ->with('success', 'Project successfully updated!');
+            ->route('event.index')
+            ->with('success', 'Event successfully updated!');
     }
     
-    public function destroy(Project $project)
+    public function destroy(Event $event)
     {
-        if ($project->file_path && File::exists(public_path($project->file_path))) {
-            File::delete(public_path($project->file_path));
+        if ($event->file_path && File::exists(public_path($event->file_path))) {
+            File::delete(public_path($event->file_path));
         }
     
-        $project->delete();
+        $event->delete();
     
         return redirect()
-            ->route('project.index')
-            ->with('success', 'Project successfully deleted!');
+            ->route('event.index')
+            ->with('success', 'Event successfully deleted!');
     }
 }

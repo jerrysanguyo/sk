@@ -196,35 +196,58 @@
             </div>
         </div>
     </div>
-</section>@php
+</section>
+@php
 $memberNames = [
-'June Lyn Tabanao',
-'SKK MAC',
-'SKS Tonton',
-'SKK Chester',
-'SKK Jam',
-'SKK AJ',
-'SKK Noime',
-'SKK Summer',
-'SKK Iris',
-'SKK Karen'
+'June Lyn Tabanao', 'SKK MAC', 'SKS Tonton', 'SKK Chester', 'SKK Jam',
+'SKK AJ', 'SKK Noime', 'SKK Summer', 'SKK Iris', 'SKK Karen'
 ];
 @endphp
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css" />
 
 <section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-3xl font-bold text-pink-600 text-center mb-12">Our Featured SK</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            @for ($i = 1; $i <= 10; $i++) <div
-                class="bg-white rounded-lg shadow p-4 text-center  hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <img src="{{ asset("images/members/admin$i.webp") }}" alt="{{ $memberNames[$i - 1] }}"
-                    class="w-full h-50 object-cover object-top rounded mb-4">
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">{{ $memberNames[$i - 1] }}</h3>
+
+        <div id="sk-carousel" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @for ($i = 1; $i <= count($memberNames); $i++) <li class="splide__slide">
+                        <div
+                            class="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg hover:-translate-y-1 transition-transform">
+                            <img src="{{ asset("images/members/admin$i.webp") }}" alt="{{ $memberNames[$i - 1] }}"
+                                class="w-full h-48 object-cover object-top rounded mb-4">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">{{ $memberNames[$i - 1] }}</h3>
+                        </div>
+                        </li>
+                        @endfor
+                </ul>
+            </div>
         </div>
-        @endfor
     </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    new Splide('#sk-carousel', {
+        perPage: 5,
+        perMove: 1,
+        gap: '1rem',
+        pagination: false,
+        breakpoints: {
+            1024: {
+                perPage: 3
+            },
+            640: {
+                perPage: 2
+            },
+            480: {
+                perPage: 1
+            },
+        }
+    }).mount();
+});
+
 function carousel(slideData) {
     return {
         slides: slideData,

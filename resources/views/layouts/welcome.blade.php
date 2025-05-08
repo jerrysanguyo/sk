@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://kit.fontawesome.com/4f2d7302b1.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css">
 </head>
 
 <body class="antialiased">

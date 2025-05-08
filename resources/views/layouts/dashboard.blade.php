@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('event.index') }}"
                                 class="flex items-center px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition">
                                 <i class="fas fa-calendar-alt w-5 mr-3 text-pink-500"></i> Events
                             </a>
@@ -81,12 +81,6 @@
                                     Inventory Category
                                 </a>
                             </div>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition">
-                                <i class="fas fa-cog w-5 mr-3 text-pink-500"></i> Settings
-                            </a>
                         </li>
                     </ul>
                 </nav>
