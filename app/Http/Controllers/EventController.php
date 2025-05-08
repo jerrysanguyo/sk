@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+    public function eventShow()
+    {
+        return view('event');
+    }
+
     public function index(Request $request)
     {
         $page_title = 'Event';

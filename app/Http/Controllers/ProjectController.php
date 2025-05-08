@@ -10,6 +10,24 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function projectShow(Request $request)
+    {
+        $page_title = 'Project';
+        $resource = 'project';
+
+        $query = Project::query();
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        $query->orderBy('created_at', 'desc');
+
+        $data = $query->paginate(8)->withQueryString();
+
+        return view('project', compact('page_title', 'resource', 'data'));
+    }
+    
     public function index(Request $request)
     {
         $page_title = 'Project';

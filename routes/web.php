@@ -19,6 +19,8 @@ Route::get('/contact-us', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/project-show', [ProjectController::class, 'projectShow'])->name('project');
+Route::get('/event-show', [EventController::class, 'eventShow'])->name('event');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
