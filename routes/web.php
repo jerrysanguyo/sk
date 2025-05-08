@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\InventoryCategoryController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,5 +13,8 @@ Route::get('/contact-us', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::resource('budget_category', BudgetCategoryController::class);
 Route::resource('inventory_category', InventoryCategoryController::class);

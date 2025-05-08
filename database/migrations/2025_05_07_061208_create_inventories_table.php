@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->sring('name');
+            $table->string('name');
             $table->foreignId('category_id')->constrained('inventory_categories');
             $table->integer('quantity');
             $table->integer('cost');

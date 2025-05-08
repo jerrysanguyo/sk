@@ -11,6 +11,12 @@
 </head>
 
 <body class="antialiased">
+
+    @if (Request::is('login'))
+    <main>
+        @yield('content')
+    </main>
+    @else
     <nav class="sticky top-0 z-50 bg-white shadow-md" x-data="{ open: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -26,7 +32,7 @@
                 <div class="hidden md:flex space-x-6">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-pink-500">Home</a>
                     <a href="{{ route('contact') }}" class="text-gray-700 hover:text-pink-500">Contact</a>
-                    <a href="#login" class="text-gray-700 hover:text-pink-500"><i
+                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-pink-500"><i
                             class="fa-solid fa-right-to-bracket"></i></a>
                 </div>
             </div>
@@ -39,18 +45,18 @@
                 x-transition:leave-end="opacity-0 transform scale-95" class="md:hidden mt-2 p-5 space-y-2">
                 <a href="{{ route('home') }}" class="block text-gray-700 hover:text-pink-500">Home</a>
                 <a href="{{ route('contact') }}" class="block text-gray-700 hover:text-pink-500">Contact</a>
-                <a href="#login" class="block text-gray-700 hover:text-pink-500"><i
+                <a href="{{ route('login') }}" class="block text-gray-700 hover:text-pink-500"><i
                         class="fa-solid fa-right-to-bracket"></i></a>
             </div>
         </div>
     </nav>
+
     <main>
         @yield('content')
     </main>
-
+    
     <footer class="bg-gray-900 text-gray-200 pt-12 pb-8">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Logo & About -->
             <div class="text-center">
                 <div class="flex justify-center mb-4">
                     <img src="{{ asset('images/logo/sk-logo.png') }}" alt="SK Logo" class="w-24">
@@ -61,7 +67,6 @@
                 </p>
             </div>
 
-            <!-- Quick Links -->
             <div>
                 <h4 class="text-lg font-semibold text-white mb-3">Quick Links</h4>
                 <ul class="space-y-2 text-sm text-gray-300">
@@ -96,6 +101,7 @@
             &copy; {{ date('Y') }} Sangguniang Kabataan. All rights reserved.
         </div>
     </footer>
+    @endif
 </body>
 
 </html>
