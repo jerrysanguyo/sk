@@ -135,8 +135,7 @@
 <section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
-            <div
-                class="flex flex-col h-full">
+            <div class="flex flex-col h-full">
                 <h2 class="text-3xl font-bold text-pink-600 text-center mb-4">Vision</h2>
                 <div
                     class="bg-white rounded-xl shadow-md p-6 text-gray-700 text-center flex-grow flex items-center justify-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
@@ -150,8 +149,7 @@
                 </div>
             </div>
 
-            <div
-                class="flex flex-col h-full">
+            <div class="flex flex-col h-full">
                 <h2 class="text-3xl font-bold text-pink-600 text-center mb-4">Mission</h2>
                 <div
                     class="bg-white rounded-xl shadow-md p-6 text-gray-700 text-center flex-grow flex items-center justify-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
@@ -212,10 +210,19 @@
 </section>
 @php
 $memberNames = [
-'June Lyn Tabanao', 'SKK MAC', 'SKS Tonton', 'SKK Chester', 'SKK Jam',
-'SKK AJ', 'SKK Noime', 'SKK Summer', 'SKK Iris', 'SKK Karen'
+'June Lyn Tabanao' => 'June Lyn leads our community outreach program, bringing new ideas and energy to every project.',
+'SKK MAC' => 'MAC specializes in event coordination and logistics—no detail is too small for their watchful eye.',
+'SKS Tonton' => 'Tonton focuses on budget transparency, ensuring our finances are always clear and accountable.',
+'SKK Chester' => 'Chester heads up our inventory team, keeping track of every single asset with precision.',
+'SKK Jam' => 'Jam drives our digital communications—social media, newsletters, and web content are in expert hands.',
+'SKK AJ' => 'AJ organizes volunteer training sessions, creating a vibrant learning culture for all SK members.',
+'SKK Noime' => 'Noime manages stakeholder relations, building strong partnerships with local businesses and NGOs.',
+'SKK Summer' => 'Summer oversees our youth programs, crafting fun, educational workshops for the next generation.',
+'SKK Iris' => 'Iris is our data specialist—she collects insights and crafts reports that guide our strategy.',
+'SKK Karen' => 'Karen coordinates our sustainability initiatives, championing green practices across all activities.',
 ];
 @endphp
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css" />
 
 <section class="py-16 bg-gray-100">
@@ -225,15 +232,29 @@ $memberNames = [
         <div id="sk-carousel" class="splide">
             <div class="splide__track">
                 <ul class="splide__list">
-                    @for ($i = 1; $i <= count($memberNames); $i++) <li class="splide__slide">
-                        <div
-                            class="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg hover:-translate-y-1 transition-transform">
-                            <img src="{{ asset("images/members/admin$i.webp") }}" alt="{{ $memberNames[$i - 1] }}"
-                                class="w-full h-48 object-cover object-top rounded mb-4">
-                            <h3 class="font-semibold text-lg text-gray-800 mb-2">{{ $memberNames[$i - 1] }}</h3>
+                    @foreach($memberNames as $name => $desc)
+                    <li class="splide__slide">
+                        <div x-data="{ flipped: false }" @click="flipped = !flipped"
+                            class="w-full h-80 [perspective:1000px] cursor-pointer">
+                            <div :class="flipped ? 'rotate-y-180' : ''"
+                                class="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d]">
+                                <div
+                                    class="absolute inset-0 bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center [backface-visibility:hidden]">
+                                    @php $idx = $loop->index + 1; @endphp
+                                    <img src="{{ asset("images/members/admin{$idx}.webp") }}" alt="{{ $name }}"
+                                        class="w-24 h-24 object-cover object-top rounded-full mb-4">
+                                    <h3 class="text-lg font-semibold text-gray-800">{{ $name }}</h3>
+                                    <p class="text-sm text-gray-500 mt-2">Click to read</p>
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-white rounded-lg shadow p-6 [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center">
+                                    <p class="text-gray-700 text-sm text-center">{{ $desc }}</p>
+                                </div>
+
+                            </div>
                         </div>
-                        </li>
-                        @endfor
+                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -241,6 +262,20 @@ $memberNames = [
 </section>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    new Splide('#sk-carousel', {
+        perPage: 3,
+        gap: '1rem',
+        breakpoints: {
+            768: {
+                perPage: 1
+            },
+            1024: {
+                perPage: 2
+            }
+        },
+    }).mount();
+});
 document.addEventListener('DOMContentLoaded', function() {
     new Splide('#sk-carousel', {
         perPage: 5,

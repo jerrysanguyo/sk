@@ -15,7 +15,7 @@
 
 <body class="antialiased">
 
-@if (Request::is('login') || Request::is('forgot-password') || Request::is('reset-password*'))
+    @if (Request::is('login') || Request::is('forgot-password') || Request::is('reset-password*'))
     <main>
         @yield('content')
     </main>
@@ -35,6 +35,37 @@
                 <div class="hidden md:flex space-x-6">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-pink-500">Home</a>
                     <a href="{{ route('contact') }}" class="text-gray-700 hover:text-pink-500">Contact</a>
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open"
+                            class="flex items-center text-gray-700 hover:text-pink-500 focus:outline-none">
+                            Services
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.354a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div x-show="open" @click.away="open = false" x-transition
+                            class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-20">
+                            <a href="{{ route('project') }}"
+                                class="block px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                                Projects
+                            </a>
+                            <a href="{{ route('event') }}"
+                                class="block px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                                Events
+                            </a>
+                            <a href="{{ route('budget') }}"
+                                class="block px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                                Budget Transparency
+                            </a>
+                            <a href="{{ route('inventory') }}"
+                                class="block px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600">
+                                Inventory
+                            </a>
+                        </div>
+                    </div>
+
                     @if (Auth::user())
                     <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-pink-500"><i
                             class="fa-solid fa-right-to-bracket"></i></a>
@@ -43,20 +74,19 @@
                             class="fa-solid fa-right-to-bracket"></i></a>
                     @endif
                 </div>
-            </div>
 
-            <div x-show="open" x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 transform scale-95"
-                x-transition:enter-end="opacity-100 transform scale-100"
-                x-transition:leave="transition ease-in duration-200"
-                x-transition:leave-start="opacity-100 transform scale-100"
-                x-transition:leave-end="opacity-0 transform scale-95" class="md:hidden mt-2 p-5 space-y-2">
-                <a href="{{ route('home') }}" class="block text-gray-700 hover:text-pink-500">Home</a>
-                <a href="{{ route('contact') }}" class="block text-gray-700 hover:text-pink-500">Contact</a>
-                <a href="{{ route('login') }}" class="block text-gray-700 hover:text-pink-500"><i
-                        class="fa-solid fa-right-to-bracket"></i></a>
+                <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 transform scale-95"
+                    x-transition:enter-end="opacity-100 transform scale-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100 transform scale-100"
+                    x-transition:leave-end="opacity-0 transform scale-95" class="md:hidden mt-2 p-5 space-y-2">
+                    <a href="{{ route('home') }}" class="block text-gray-700 hover:text-pink-500">Home</a>
+                    <a href="{{ route('contact') }}" class="block text-gray-700 hover:text-pink-500">Contact</a>
+                    <a href="{{ route('login') }}" class="block text-gray-700 hover:text-pink-500"><i
+                            class="fa-solid fa-right-to-bracket"></i></a>
+                </div>
             </div>
-        </div>
     </nav>
 
     <main>

@@ -113,38 +113,47 @@ return $item->cost * $item->quantity;
                 <td class="py-2 px-4">{{ $record->cost ?? '' }}</td>
                 @elseif ($resource === 'feedback')
                 <td class="py-2 px-4">{{ $record->subject ?? '' }}</td>
-                <td class="py-2 px-4">{{ $record->message ?? '' }}</td>
+                <td class="py-2 px-4">{{ Str::limit($record->message ?? '', 100, ' ...') }}</td>
                 @else
                 <td class="py-2 px-4">{{ $record->name ?? '' }}</td>
                 <td class="py-2 px-4">{{ $record->remarks ?? '' }}</td>
                 @endif
 
-                @unless ($resource === 'feedback')
                 <td class="py-2 px-4">
-                    <div class="inline-flex items-center space-x-2">
-                        <div x-data="{ showEditModal: false }">
-                            <button @click="showEditModal = true"
-                                class="inline-block p-2 bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 rounded transition-colors"
-                                title="Edit">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            @include('cms.edit')
-                        </div>
-                        <div x-data="{ showDeleteModal: false }">
-                            <button @click="showDeleteModal = true"
-                                class="inline-block p-2 bg-red-100 text-red-500 hover:bg-red-200 hover:text-red-700 rounded transition-colors"
-                                title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                            @include('cms.destroy')
-                        </div>
+                    <div x-data="{ showShowModal: false }">
+                        <button @click="showShowModal = true"
+                            class="inline-block p-2 bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 rounded transition-colors"
+                            title="show">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                        @include('cms.show')
                     </div>
-                </td>
-                @endunless
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                    @if ($resource === 'feedback')
+                    @else
+                    <div class="inline-flex items-center space-x-2"></div>
+                    <div x-data="{ showEditModal: false }">
+                        <button @click="showEditModal = true"
+                            class="inline-block p-2 bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 rounded transition-colors"
+                            title="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        @include('cms.edit')
+                    </div>
+                    <div x-data="{ showDeleteModal: false }">
+                        <button @click="showDeleteModal = true"
+                            class="inline-block p-2 bg-red-100 text-red-500 hover:bg-red-200 hover:text-red-700 rounded transition-colors"
+                            title="Delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        @include('cms.destroy')
+                    </div>
+</div>
+@endif
+</td>
+</tr>
+@endforeach
+</tbody>
+</table>
 </div>
 
 <script>
