@@ -9,6 +9,7 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -24,6 +25,7 @@ Route::get('/contact-us', function () {
 Route::get('/project-show', [ProjectController::class, 'projectShow'])->name('project');
 Route::get('/event-show', [EventController::class, 'eventShow'])->name('event');
 Route::get('/budget-show', [BudgetController::class, 'budgetShow'])->name('budget');
+Route::get('/inventory-show', [InventoryController::class, 'inventoryShow'])->name('inventory');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -31,6 +33,9 @@ Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequest
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+Route::resource('feedback', FeedbackController::class);
 
 Route::middleware(['auth'])
     ->group(function() {

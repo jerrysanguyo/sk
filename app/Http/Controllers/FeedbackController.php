@@ -3,63 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
-use Illuminate\Http\Request;
+use App\Http\Requests\FeedbackRequest;
+use App\DataTables\CmsDataTable;
 
 class FeedbackController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(CmsDataTable $dataTable)
     {
-        //
+        $page_title = 'Feedback';
+        $resource = 'feedback';
+        $columns = ['id', 'subject', 'message'];
+        $data = Feedback::getAllFeedbacks();
+
+        return $dataTable
+            ->render('cms.index', compact(
+                'page_title',
+                'resource', 
+                'columns',
+                'data',
+                'dataTable',
+            ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(FeedbackRequest $request)
     {
-        //
-    }
+        $validated = $request->validated();
+        Feedback::create($validated);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Feedback $feedback)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Feedback $feedback)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Feedback $feedback)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Feedback $feedback)
-    {
-        //
+        return redirect()
+            ->route('contact')
+            ->with('success', 'Feedback submitted successfully!');
     }
 }

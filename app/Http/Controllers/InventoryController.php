@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
+    public function inventoryShow(CmsDataTable $dataTable)
+    {
+        $page_title = 'Inventory';
+        $resource = 'inventory';
+        $columns = ['id', 'category', 'name', 'quantity', 'cost', 'actions'];
+        $data = Inventory::getAllInventories();
+        $inventoryCategories = InventoryCategory::getAllInventoryCategories();
+
+        return $dataTable
+            ->render('budget', compact(
+                'page_title',
+                'resource', 
+                'columns',
+                'data',
+                'dataTable',
+                'inventoryCategories',
+            ));
+    }
+
     public function index(CmsDataTable $dataTable)
     {
         $page_title = 'Inventory';

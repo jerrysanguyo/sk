@@ -1,6 +1,7 @@
 @extends('layouts.welcome')
 @section('content')
 
+@include('components.alert')
 <section>
     <div class="w-full h-full flex-shrink-0">
         <img src="{{ asset('images/banner2.jpg') }}" class="w-full h-full object-cover object-center" alt="Slide Image">
@@ -13,7 +14,6 @@
                 Got a question? We'd love to hear from you. Send us a message and we’ll respond as soon as possible.
             </h2>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <a href="tel:+639190793112"
                 class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
@@ -39,6 +39,34 @@
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Visit Us</h3>
                 <p class="text-gray-600 text-sm">Lower Bicutan, Taguig City</p>
             </a>
+        </div>
+
+        <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-8 mt-5">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Send Us Your Feedback</h3>
+            <form action="{{ route('feedback.store') }}" method="POST" class="space-y-6">
+                @csrf
+
+                <div>
+                    <label for="subject" class="block text-gray-700 font-medium mb-1">Subject<span
+                            class="text-red-500">*</span></label>
+                    <input type="text" id="subject" name="subject" required
+                        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
+                </div>
+
+                <div>
+                    <label for="message" class="block text-gray-700 font-medium mb-1">Message<span
+                            class="text-red-500">*</span></label>
+                    <textarea id="message" name="message" rows="5" required
+                        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit"
+                        class="bg-pink-600 text-white font-semibold px-6 py-3 rounded-md shadow hover:bg-pink-700 transition">
+                        Submit Feedback
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </section>

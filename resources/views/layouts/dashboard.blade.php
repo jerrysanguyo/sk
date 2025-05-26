@@ -63,6 +63,12 @@
                                 <i class="fas fa-warehouse w-5 mr-3 text-pink-500"></i> Inventory
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('feedback.index') }}"
+                                class="flex items-center px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition">
+                                <i class="fas fa-message w-5 mr-3 text-pink-500"></i> Feedback
+                            </a>
+                        </li>
                         <li x-data="{ open: false }" class="relative">
                             <button @click="open = !open"
                                 class="flex items-center w-full px-6 py-3 hover:bg-pink-50 hover:text-pink-600 transition text-left">

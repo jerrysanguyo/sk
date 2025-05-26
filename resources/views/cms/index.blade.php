@@ -74,6 +74,7 @@ return $item->cost * $item->quantity;
 <div class="w-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 overflow-auto max-h-[85vh] min-h-[85vh]">
     <div class="flex justify-between items-center mb-5 overflow-auto">
         <h1 class="text-3xl font-bold mb-2 text-center text-gray-800">{{ $page_title }} records</h1>
+        @unless ($resource === 'feedback')
         <div x-data="{ showModal: false }">
             <button @click="showModal = true"
                 class="px-5 py-2 text-white bg-pink-600 rounded-lg hover:bg-pink-700 hover:text-white border border-pink-700 transition-colors">
@@ -81,6 +82,7 @@ return $item->cost * $item->quantity;
             </button>
             @include('cms.create')
         </div>
+        @endunless
     </div>
 
     @include('components.alert')
@@ -109,10 +111,15 @@ return $item->cost * $item->quantity;
                 <td class="py-2 px-4">{{ $record->name ?? '' }}</td>
                 <td class="py-2 px-4">{{ $record->quantity ?? '' }}</td>
                 <td class="py-2 px-4">{{ $record->cost ?? '' }}</td>
+                @elseif ($resource === 'feedback')
+                <td class="py-2 px-4">{{ $record->subject ?? '' }}</td>
+                <td class="py-2 px-4">{{ $record->message ?? '' }}</td>
                 @else
                 <td class="py-2 px-4">{{ $record->name ?? '' }}</td>
                 <td class="py-2 px-4">{{ $record->remarks ?? '' }}</td>
                 @endif
+
+                @unless ($resource === 'feedback')
                 <td class="py-2 px-4">
                     <div class="inline-flex items-center space-x-2">
                         <div x-data="{ showEditModal: false }">
@@ -133,6 +140,7 @@ return $item->cost * $item->quantity;
                         </div>
                     </div>
                 </td>
+                @endunless
             </tr>
             @endforeach
         </tbody>
