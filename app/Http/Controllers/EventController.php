@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRegistrationRequest;
 use App\Models\EventRegistration;
+use App\DataTables\CmsDataTable;
 
 class EventController extends Controller
 {
@@ -26,7 +27,7 @@ class EventController extends Controller
             ->with('success', 'Registration successful!');
     }
 
-    public function eventShow(Request $request)
+    public function eventShow(CmsDataTable $dataTabke, Request $request)
     {
         $page_title = 'event';
         $resource = 'event';
@@ -91,10 +92,20 @@ class EventController extends Controller
             ->with('success', 'Event successfully created!');
     }
     
-    public function show(Event $event)
+    public function show(CmsDataTable $dataTable, Event $event)
     {
         $resource = 'event';
-        return view('project.show', compact('event', 'resource'));
+        $columns = ['id', 'full name', 'email', 'contact number'];
+        $data = EventRegistration::where('event_id', $event->id)->get();
+
+        return $dataTable
+            ->render('project.show', compact(
+                'dataTable', 
+                'resource',
+                'event',
+                'columns',
+                'data',
+            ));
     }
     
     public function update(ProjectRequest $request, Event $event)
