@@ -7,9 +7,25 @@ use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use App\Http\Requests\EventRegistrationRequest;
+use App\Models\EventRegistration;
 
 class EventController extends Controller
 {
+    public function eventRegistration(EventRegistrationRequest $request, Event $event)
+    {
+        EventRegistration::create([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'contact_number' => $request->contact_number,
+            'event_id' => $event->id,
+        ]);
+
+        return redirect()
+            ->route('event')
+            ->with('success', 'Registration successful!');
+    }
+
     public function eventShow(Request $request)
     {
         $page_title = 'event';
