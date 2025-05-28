@@ -22,6 +22,10 @@ Route::get('/contact-us', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/test-chart', function () {
+    return view('test-chart');
+})->name('test-chart');
+
 Route::get('/project-show', [ProjectController::class, 'projectShow'])->name('project');
 Route::get('/event-show', [EventController::class, 'eventShow'])->name('event');
 Route::get('/budget-show', [BudgetController::class, 'budgetShow'])->name('budget');
