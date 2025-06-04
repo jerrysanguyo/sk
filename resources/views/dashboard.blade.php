@@ -1,17 +1,24 @@
 @extends('layouts.dashboard')
+
 @section('content')
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-white p-5 rounded-lg shadow text-center">
-        <h2 class="text-md font-semibold text-gray-700">Projects</h2>
-        <p class="text-3xl font-bold text-pink-600 mt-2">12</p>
+<div class="grid gap-6 lg:grid-cols-2">
+    <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="font-semibold mb-4">Projects vs Events</h3>
+        <div class="h-80">
+            {!! $projectsEventsChart->container() !!}
+        </div>
     </div>
-    <div class="bg-white p-5 rounded-lg shadow text-center">
-        <h2 class="text-md font-semibold text-gray-700">Events</h2>
-        <p class="text-3xl font-bold text-pink-600 mt-2">7</p>
-    </div>
-    <div class="bg-white p-5 rounded-lg shadow text-center">
-        <h2 class="text-md font-semibold text-gray-700">Budget</h2>
-        <p class="text-3xl font-bold text-pink-600 mt-2">₱120k</p>
+    <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="font-semibold mb-4">Total Spent per Month</h3>
+        <div class="h-80">
+            {!! $spentChart->container() !!}
+        </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{!! $projectsEventsChart->script() !!}
+{!! $spentChart->script() !!}
+@endpush

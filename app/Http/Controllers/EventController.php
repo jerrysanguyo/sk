@@ -7,10 +7,27 @@ use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use App\Http\Requests\EventRegistrationRequest;
+use App\Models\EventRegistration;
+use App\DataTables\CmsDataTable;
 
 class EventController extends Controller
 {
-    public function eventShow(Request $request)
+    public function eventRegistration(EventRegistrationRequest $request, Event $event)
+    {
+        EventRegistration::create([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'contact_number' => $request->contact_number,
+            'event_id' => $event->id,
+        ]);
+
+        return redirect()
+            ->route('event')
+            ->with('success', 'Registration successful!');
+    }
+
+    public function eventShow(CmsDataTable $dataTabke, Request $request)
     {
         $page_title = 'event';
         $resource = 'event';
@@ -75,10 +92,20 @@ class EventController extends Controller
             ->with('success', 'Event successfully created!');
     }
     
-    public function show(Event $event)
+    public function show(CmsDataTable $dataTable, Event $event)
     {
         $resource = 'event';
-        return view('project.show', compact('event', 'resource'));
+        $columns = ['id', 'full name', 'email', 'contact number'];
+        $data = EventRegistration::where('event_id', $event->id)->get();
+
+        return $dataTable
+            ->render('project.show', compact(
+                'dataTable', 
+                'resource',
+                'event',
+                'columns',
+                'data',
+            ));
     }
     
     public function update(ProjectRequest $request, Event $event)

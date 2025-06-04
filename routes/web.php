@@ -22,6 +22,10 @@ Route::get('/contact-us', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/test-chart', function () {
+    return view('test-chart');
+})->name('test-chart');
+
 Route::get('/project-show', [ProjectController::class, 'projectShow'])->name('project');
 Route::get('/event-show', [EventController::class, 'eventShow'])->name('event');
 Route::get('/budget-show', [BudgetController::class, 'budgetShow'])->name('budget');
@@ -33,6 +37,7 @@ Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequest
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::post('/event-registration/{event}', [EventController::class, 'eventRegistration'])->name('event.registration');
 
 
 Route::resource('feedback', FeedbackController::class);
